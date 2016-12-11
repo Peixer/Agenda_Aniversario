@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Family Peixer</string>
+    <string name="app_name">Birthday Calendar</string>
     <string name="title_activity_sobre">Project</string>
     <string name="title_activity_contato">Information contacts</string>
 
@@ -23,7 +23,7 @@
     <string name="btn_adicionar">Insert</string>
     <string name="aniversario_de">"Birthday of "</string>
     <string name="selecione_mensagem">Select Picture</string>
-    <string name="app_name2">Aplication Family Peixer</string>
+    <string name="app_name2">Aplication Birthday Calendar</string>
 
 
     <string name="send_email">Send e-mail</string>
