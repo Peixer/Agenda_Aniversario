@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="calendario_item_width">27dp</dimen>
+    <dimen name="calendario_item_height">30dp</dimen>
+    <dimen name="calendario2_item_width">37dp</dimen>
+    <dimen name="calendario2_item_height">39dp</dimen>
+
+    <dimen name="crop__bar_height">56dp</dimen>
+</resources>

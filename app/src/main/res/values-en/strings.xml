@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Family Peixer</string>
+    <string name="title_activity_sobre">Project</string>
+    <string name="title_activity_contato">Information contacts</string>
+
+    <string name="title_section1">Fragment Main</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <color name="text_color">#31D1F1</color>
+    <color name="white">#ffffff</color>
+    <string name="open">Open</string>
+    <string name="contatos">Contacts</string>
+    <string name="aniversariantes">Birthdays</string>
+    <string name="menu">Main</string>
+    <string name="usuario">Account</string>
+    <string name="atualizar">Update</string>
+    <string name="sobre">About</string>
+    <string name="hint_nome">  Name</string>
+    <string name="hint_aniversario">  Birthday</string>
+    <string name="hint_email">  E-mail</string>
+    <string name="btn_adicionar">Insert</string>
+    <string name="aniversario_de">"Birthday of "</string>
+    <string name="selecione_mensagem">Select Picture</string>
+    <string name="app_name2">Aplication Family Peixer</string>
+
+
+    <string name="send_email">Send e-mail</string>
+</resources>

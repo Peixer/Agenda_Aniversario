@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="br.glaicon.agenda_aniversarios.ContatoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/imageView2"
+            android:layout_gravity="right"
+            android:layout_weight="0.79"
+            android:scaleType="fitXY"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/plano_de_fundo"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:baselineAlignBottom="true"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:src="@drawable/user"
+            android:layout_marginBottom="31dp"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_alignParentStart="true"/>
+
+        <EditText
+            android:id="@+id/edtNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elegantTextHeight="false"
+            android:hint="@string/hint_nome"
+            android:inputType="textPersonName"
+            android:layout_below="@+id/edtEmail"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:id="@+id/edtAniversario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:editable="false"
+            android:hint="@string/hint_aniversario"
+            android:onClick="adicionaAniversario"
+            android:layout_below="@+id/imageView2"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            android:layout_below="@+id/edtAniversario"
+            android:layout_alignParentLeft="true" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:onClick="adicionar"
+        android:text="@string/btn_adicionar" />
+
+</RelativeLayout>

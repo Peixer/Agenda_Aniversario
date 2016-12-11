@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Aniversariantes</string>
+    <string name="title_activity_sobre">Projeto</string>
+    <string name="title_activity_contato">Informações contato</string>
+
+    <string name="title_section1">Fragment Main</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <color name="text_color">#31D1F1</color>
+    <color name="white">#ffffff</color>
+    <string name="open">Open</string>
+    <string name="contatos">Contatos</string>
+    <string name="aniversariantes">Aniversariantes</string>
+    <string name="menu">Menu</string>
+    <string name="usuario">Perfil</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="sobre">Sobre</string>
+    <string name="hint_nome">  Nome</string>
+    <string name="hint_aniversario">  Aniversário</string>
+    <string name="hint_email">  E-mail</string>
+    <string name="btn_adicionar">Adicionar</string>
+    <string name="aniversario_de">"Aniversário de "</string>
+    <string name="selecione_mensagem">Selecione Imagem</string>
+    <string name="app_name2">Aplicativo Aniversariante</string>
+
+
+    <string name="crop__saving">Saving picture…</string>
+    <string name="crop__wait">Please wait…</string>
+    <string name="crop__pick_error">No image sources available</string>
+
+    <string name="send_email">Enviar e-mail</string>
+
+    <string name="crop__done">DONE</string>
+    <string name="crop__cancel" tools:ignore="ButtonCase">CANCEL</string>
+</resources>

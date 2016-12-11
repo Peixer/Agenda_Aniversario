@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="activity_horizontal_margin">64dp</dimen>
+
+    <dimen name="calendario_item_width">37dp</dimen>
+    <dimen name="calendario_item_height">20dp</dimen>
+    <dimen name="calendario2_item_width">57dp</dimen>
+    <dimen name="calendario2_item_height">25dp</dimen>
+</resources>

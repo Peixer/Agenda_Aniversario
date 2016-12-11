@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_background"
+    android:orientation="vertical"
+    android:padding="3dp">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/date"
+        android:layout_width="@dimen/calendario_item_width"
+        android:layout_height="@dimen/calendario_item_height"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/date_icon"
+        android:layout_width="@dimen/calendario2_item_width"
+        android:layout_height="@dimen/calendario2_item_height"
+        android:layout_below="@+id/date"
+        android:layout_toEndOf="@+id/date"
+        android:src="@drawable/cake"
+        android:visibility="invisible" />
+</RelativeLayout>
