@@ -49,28 +49,26 @@ public class CalendarAdapter extends BaseAdapter {
     }
 
     public View getView(int index, View convertView, ViewGroup parent) {
-        View view = convertView;
-
         if (inflater == null)
             inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         CalendarViewHolder calendarVH;
 
-        if (view == null) {
-            view = inflater.inflate(R.layout.calendar_item, null);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.calendar_item, null);
 
             calendarVH = new CalendarViewHolder();
-            calendarVH.imageView = (ImageView) view.findViewById(R.id.date_icon);
-            calendarVH.diaView = (TextView) view.findViewById(R.id.date);
+            calendarVH.imageView = (ImageView) convertView.findViewById(R.id.date_icon);
+            calendarVH.diaView = (TextView) convertView.findViewById(R.id.date);
 
-            view.setTag(calendarVH);
+            convertView.setTag(calendarVH);
         } else
-            calendarVH = (CalendarViewHolder) view.getTag();
+            calendarVH = (CalendarViewHolder) convertView.getTag();
 
         if (dias[index].equals("")) {
             desabilitarDia(calendarVH);
         } else {
-            alterarCorDeFundoDoDia(dias[index], view);
+            alterarCorDeFundoDoDia(dias[index], convertView);
         }
 
         calendarVH.diaView.setText(dias[index]);
@@ -80,7 +78,7 @@ public class CalendarAdapter extends BaseAdapter {
         else
             calendarVH.imageView.setVisibility(View.INVISIBLE);
 
-        return view;
+        return convertView;
     }
 
     private void desabilitarDia(CalendarViewHolder calendarVH) {

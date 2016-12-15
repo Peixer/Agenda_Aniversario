@@ -1,7 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Agenda de Aniversariantes</string>
+    <string name="app_name2">Aplicativo Agenda de Aniversariantes</string>
+
+    <!-- ACTIVITY -->
     <string name="title_activity_sobre">Projeto</string>
     <string name="title_activity_contato">Informações contato</string>
+    <string name="title_activity_importar_activity">ImportarActiviry</string>
 
     <string name="title_section1">Fragment Main</string>
     <string name="drawer_open">Abrir</string>
@@ -12,24 +16,25 @@
     <string name="open">Open</string>
     <string name="contatos">Contatos</string>
     <string name="aniversariantes">Aniversariantes</string>
-    <string name="menu">Menu</string>
-    <string name="usuario">Perfil</string>
-    <string name="atualizar">Atualizar</string>
-    <string name="sobre">Sobre</string>
     <string name="hint_nome">  Nome</string>
     <string name="hint_aniversario">  Aniversário</string>
     <string name="hint_email">  E-mail</string>
     <string name="btn_adicionar">Adicionar</string>
     <string name="aniversario_de">"Aniversário de "</string>
     <string name="selecione_mensagem">Selecione Imagem</string>
-    <string name="app_name2">Aplicativo Agenda de Aniversariantes</string>
+    <string name="send_email">Enviar e-mail</string>
 
+    <!-- MENU LATERAL-->
+    <string name="menu">Menu</string>
+    <string name="adicionar_menu_lateral">Adicionar contato</string>
+    <string name="exportar_menu_lateral">Exportar contatos</string>
+    <string name="importar_menu_lateral">Importar contatos</string>
+    <string name="avaliacao_menu_lateral">Avaliação</string>
 
+    <!-- CROP -->
     <string name="crop__saving">Salvando foto…</string>
     <string name="crop__wait">Por favor aguarde…</string>
     <string name="crop__pick_error">Sem imagem disponível</string>
-
-    <string name="send_email">Enviar e-mail</string>
 
     <string name="crop__done">Feito</string>
     <string name="crop__cancel" tools:ignore="ButtonCase">Cancelar</string>

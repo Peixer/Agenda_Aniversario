@@ -18,9 +18,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Glaicon on 18/08/2015.
- */
 public class ListCalendarAdapter extends BaseAdapter {
     ArrayList<Contato> contatos;
     Context context;

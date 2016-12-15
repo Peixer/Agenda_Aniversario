@@ -16,9 +16,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-/**
- * Created by Glaicon on 09/08/2015.
- */
 public class PageFragment extends Fragment {
 
     private int position;
@@ -37,20 +34,20 @@ public class PageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null)
+        if (savedInstanceState == null) {
+            contatoDAO = ContatoDAO.getInstance(getActivity());
 
-        contatoDAO = ContatoDAO.getInstance(getActivity());
+            try {
+                contatos = contatoDAO.buscarContatos(getTipoOrdenacao());
 
-        try {
-            contatos = contatoDAO.buscarContatos(getTipoOrdenacao());
+                if (position == 0)
+                    Collections.sort(contatos, dataComparator);
 
-            if (position == 0)
-                Collections.sort(contatos, dataComparator);
+                contatoAdapterContatos = new ContatoAdapter(getActivity(), contatos, getTipoOrdenacao());
 
-            contatoAdapterContatos = new ContatoAdapter(getActivity(), contatos, getTipoOrdenacao());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -62,11 +62,6 @@ public class MainActivity extends ActionBarActivity implements android.support.v
             int tabPosition = savedInstanceState.getInt("tab");
             pager.setCurrentItem(tabPosition);
         }
-
-        ImageView imageView = (ImageView) this.findViewById(R.id.imagemPessoa);
-        RoundImage roundImage = new RoundImage(((BitmapDrawable) getResources().getDrawable(R.drawable.user)).getBitmap());
-
-        imageView.setImageDrawable(roundImage);
     }
 
     private void setSwipeView() {
@@ -101,14 +96,20 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer_list);
 
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new String[]{getString(R.string.usuario), getString(R.string.atualizar), getString(R.string.sobre)}));
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new String[]{getString(R.string.adicionar_menu_lateral), getString(R.string.importar_menu_lateral), getString(R.string.exportar_menu_lateral), getString(R.string.avaliacao_menu_lateral)}));
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     Intent intent = new Intent(getApplicationContext(), ContatoActivity.class);
                     startActivityForResult(intent, ContatoActivity.ADICIONAR);
+                }else if (position == 1) {
+                    Intent intent = new Intent(getApplicationContext(), ImportarActiviry.class);
+                    startActivity(intent);
                 } else if (position == 2) {
+                    Intent intent = new Intent(getApplicationContext(), SobreActivity.class);
+                    startActivity(intent);
+                } else if (position == 3) {
                     Intent intent = new Intent(getApplicationContext(), SobreActivity.class);
                     startActivity(intent);
                 }
@@ -209,11 +210,10 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                     if (fragment instanceof PageFragment && ((PageFragment) fragment).getPosition() == 0 && ((PageFragment) fragment).listViewContatos != null) {
                         View calendarView = fragment.getView().findViewById(R.id.fragment_calendar);
 
-                        if(ativarVisibilidadeCalendario){
+                        if (ativarVisibilidadeCalendario) {
                             calendarView.setVisibility(View.VISIBLE);
                             ((PageFragment) fragment).listViewContatos.setVisibility(View.INVISIBLE);
-                        }
-                        else{
+                        } else {
                             calendarView.setVisibility(View.INVISIBLE);
                             ((PageFragment) fragment).listViewContatos.setVisibility(View.VISIBLE);
                         }
