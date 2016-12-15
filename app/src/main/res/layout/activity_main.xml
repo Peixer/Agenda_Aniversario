@@ -10,15 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ListView
-        android:id="@+id/drawer_list"
-        android:layout_alignBottom="@+id/relative_drawer"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="match_parent"
         android:layout_gravity="left|start"
-        android:visibility="visible"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentBottom="true" />
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/drawer_list"
+            android:layout_width="match_parent"
+            android:layout_height="430dp"
+            android:layout_gravity="left|start"
+            android:visibility="visible" />
+    </RelativeLayout>
+
 
 </android.support.v4.widget.DrawerLayout>
 

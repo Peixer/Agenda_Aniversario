@@ -56,12 +56,14 @@ public class PageFragment extends Fragment {
     }
 
     public void refreshContatos() throws ParseException {
-        contatos.clear();
+        if (contatos != null) {
+            contatos.clear();
 
-        contatos.addAll(contatoDAO.buscarContatos(getTipoOrdenacao()));
-        Collections.sort(contatos, getComparator());
+            contatos.addAll(contatoDAO.buscarContatos(getTipoOrdenacao()));
+            Collections.sort(contatos, getComparator());
 
-        contatoAdapterContatos.updateList();
+            contatoAdapterContatos.updateList();
+        }
     }
 
     public void addContato(Contato contato) {

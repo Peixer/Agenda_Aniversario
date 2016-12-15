@@ -5,7 +5,7 @@
     <!-- ACTIVITY -->
     <string name="title_activity_sobre">Projeto</string>
     <string name="title_activity_contato">Informações contato</string>
-    <string name="title_activity_importar_activity">ImportarActiviry</string>
+    <string name="title_activity_importar_activity">Importar</string>
 
     <string name="title_section1">Fragment Main</string>
     <string name="drawer_open">Abrir</string>

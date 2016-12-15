@@ -3,7 +3,6 @@ package br.glaicon.agenda_aniversarios;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.StrictMode;
@@ -21,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.sql.SQLException;
@@ -104,7 +102,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                     Intent intent = new Intent(getApplicationContext(), ContatoActivity.class);
                     startActivityForResult(intent, ContatoActivity.ADICIONAR);
                 }else if (position == 1) {
-                    Intent intent = new Intent(getApplicationContext(), ImportarActiviry.class);
+                    Intent intent = new Intent(getApplicationContext(), ImportarActivity.class);
                     startActivity(intent);
                 } else if (position == 2) {
                     Intent intent = new Intent(getApplicationContext(), SobreActivity.class);

@@ -49,7 +49,7 @@
         </receiver>
 
         <activity
-            android:name=".ImportarActiviry"
+            android:name=".ImportarActivity"
             android:label="@string/title_activity_importar_activity"
             android:parentActivityName=".MainActivity">
         </activity>
