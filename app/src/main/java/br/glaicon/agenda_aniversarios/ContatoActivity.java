@@ -27,15 +27,28 @@ import br.glaicon.agenda_aniversarios.Volley.BitmapCache;
 
 public class ContatoActivity extends ActionBarActivity {
 
+    public static int ADICIONAR = 100;
+
     EditText edtNome;
     EditText edtEmail;
     EditText edtAniversario;
     ImageView image;
     ImagemHelper imagemHelper;
+
+    Contato contato;
     long date = 0;
     Uri Uri = android.net.Uri.EMPTY;
-    public static int ADICIONAR = 100;
     BitmapCache bitmapCache = AppController.getInstance().getBitmapCache();
+
+    public Contato getContato() {
+        if (contato == null) contato = new Contato();
+
+        return contato;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
+    }
 
     public String ObterNomeDoContato() {
         return edtNome.getText().toString();
@@ -66,6 +79,8 @@ public class ContatoActivity extends ActionBarActivity {
     private void ExtrairContatoDoExtra() {
         final Contato contato = (Contato) getIntent().getSerializableExtra("contato");
         if (contato != null) {
+            setContato(contato);
+
             edtNome.setText(contato.getNome());
             edtEmail.setText(contato.getEmail());
             edtAniversario.setText(DateFormat.getDateInstance().format(contato.getDate()));
@@ -83,9 +98,13 @@ public class ContatoActivity extends ActionBarActivity {
         else
             dateAdd = new Date();
 
-        Contato contato = new Contato(ObterNomeDoContato(), dateAdd, edtEmail.getText().toString(), imagemHelper.obterCaminhoDaImagemDoContato(ObterNomeDoContato()));
+        getContato().setNome(ObterNomeDoContato());
+        getContato().setDate(dateAdd);
+        getContato().setEmail(edtEmail.getText().toString());
+        getContato().setUriFoto(imagemHelper.obterCaminhoDaImagemDoContato(getContato().getUUID().toString()));
+
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("contato", contato);
+        returnIntent.putExtra("contato", getContato());
         setResult(RESULT_OK, returnIntent);
         finish();
     }
@@ -130,7 +149,7 @@ public class ContatoActivity extends ActionBarActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == Crop.REQUEST_PICK)
                 try {
-                    Crop.of(data.getData(), android.net.Uri.fromFile(imagemHelper.obterImagemPeloNomeDoContato(ObterNomeDoContato()))).asSquare().start(this);
+                    Crop.of(data.getData(), android.net.Uri.fromFile(imagemHelper.obterImagemPeloNomeDoContato(getContato().getUUID().toString()))).asSquare().start(this);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

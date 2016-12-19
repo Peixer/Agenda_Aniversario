@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 public class ContatoMensageria implements Serializable {
 
@@ -26,6 +27,7 @@ public class ContatoMensageria implements Serializable {
     private String email;
     private String uriFoto;
     private byte[] bytesDaFoto;
+    private java.util.UUID UUID;
 
     public String getUriFoto() {
         return uriFoto;
@@ -41,6 +43,10 @@ public class ContatoMensageria implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public java.util.UUID getUUID() {
+        return UUID;
     }
 
     public ImagemHelper getImagemHelper() {
@@ -60,6 +66,7 @@ public class ContatoMensageria implements Serializable {
         email = contato.getEmail();
         date = contato.getDate();
         uriFoto = contato.getUriFoto();
+        UUID = java.util.UUID.fromString(contato.getUUID().toString());
     }
 
     private void writeObject(ObjectOutputStream o)
@@ -68,7 +75,8 @@ public class ContatoMensageria implements Serializable {
         o.writeObject(nome);
         o.writeObject(date);
         o.writeObject(email);
-        o.writeObject(getImagemHelper().obterBytesDaImagemDeContato(nome));
+        o.writeObject(UUID.toString());
+        o.writeObject(getImagemHelper().obterBytesDaImagemDeContato(UUID.toString()));
     }
 
     private void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
@@ -76,13 +84,14 @@ public class ContatoMensageria implements Serializable {
         nome = (String) o.readObject();
         date = (Date) o.readObject();
         email = (String) o.readObject();
+        UUID = java.util.UUID.fromString((String) o.readObject());
         bytesDaFoto = (byte[]) o.readObject();
     }
 
     public void GravarFotoDoContato(Context context) throws IOException {
         this.context = context;
 
-        File arquivoDaImagem = getImagemHelper().obterImagemPeloNomeDoContato(nome);
+        File arquivoDaImagem = getImagemHelper().obterImagemPeloNomeDoContato(UUID.toString());
         FileOutputStream out = new FileOutputStream(arquivoDaImagem);
         out.write(bytesDaFoto);
         out.close();

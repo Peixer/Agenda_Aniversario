@@ -88,6 +88,7 @@ public class ContatoDAO {
         values.put(ConstantesSQL.COLUMN_DATE, contato.getDate().getTime());
         values.put(ConstantesSQL.COLUMN_EMAIL, contato.getEmail());
         values.put(ConstantesSQL.COLUMN_URI, contato.getUriFoto());
+        values.put(ConstantesSQL.COLUMN_UUID, contato.getUUID().toString());
 
         dataBase.insert(ConstantesSQL.DB_TABLE, null, values);
     }
@@ -102,37 +103,8 @@ public class ContatoDAO {
         Date date = new Date(cursor.getLong(2));
         String email = cursor.getString(3);
         String uri = cursor.getString(4);
+        String uuid = cursor.getString(5);
 
-        return new Contato(nome, date, email, uri);
-    }
-
-    public void importarContatos(Context context) {
-        for (Contato contato : obterVariosContatos(context)) {
-            addContato(contato);
-        }
-    }
-
-
-    private List<Contato> obterVariosContatos(Context context) {
-
-        List<Contato> contatos = new ArrayList<Contato>();
-        contatos.add(new Contato("Joao", new Date(2016, 1, 12), "joao@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Maria", new Date(1992, 2, 11), "maria@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Andre", new Date(1993, 3, 30), "andre@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Carlos", new Date(1994, 4, 12), "carlos@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Rodrigo", new Date(1999, 5, 22), "rodrigo@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Argeu", new Date(1995, 6, 10), "argeu@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Fernando", new Date(1980, 7, 11), "fernando@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Daniel", new Date(1997, 8, 1), "daniel@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Renan", new Date(1993, 9, 12), "renan@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Bruna", new Date(1992, 10, 17), "bruna@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Paulo", new Date(2002, 11, 18), "paulo@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-        contatos.add(new Contato("Gabriel", new Date(2000, 12, 10), "gabriel@agenda.com", getDirectoryBase(context, "Glaicon Jose Peixer")));
-
-        return contatos;
-    }
-
-    private String getDirectoryBase(Context context, String nome) {
-        return context.getFilesDir() + "//Imagem//" + nome;
+        return new Contato(nome, date, email, uri, uuid);
     }
 }

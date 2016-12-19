@@ -20,25 +20,25 @@ public class ImagemHelper {
         return this.context.getFilesDir() + "//Imagem";
     }
 
-    public String obterCaminhoDaImagemDoContato(String nome) {
-        return obterDiretorioBaseDasImagens() + "//" + nome;
+    public String obterCaminhoDaImagemDoContato(String uuid) {
+        return obterDiretorioBaseDasImagens() + "//" + uuid;
     }
 
-    public File obterImagemPeloNomeDoContato(String nome) throws IOException {
+    public File obterImagemPeloNomeDoContato(String uuid) throws IOException {
         File diretorioBase = new File(obterDiretorioBaseDasImagens());
         if (!diretorioBase.exists())
             diretorioBase.mkdir();
 
-        File arquivoImagem = new File(obterDiretorioBaseDasImagens(), nome);
+        File arquivoImagem = new File(obterDiretorioBaseDasImagens(), uuid);
         if (!arquivoImagem.exists())
             arquivoImagem.createNewFile();
 
         return arquivoImagem;
     }
 
-    public byte[] obterBytesDaImagemDeContato(String nome) throws IOException {
+    public byte[] obterBytesDaImagemDeContato(String uuid) throws IOException {
 
-        File arquivo = new File(obterDiretorioBaseDasImagens(), nome);
+        File arquivo = new File(obterDiretorioBaseDasImagens(), uuid);
         FileInputStream inputStream = new FileInputStream(arquivo);
         byte[] bytesDaImagem = new byte[(int) arquivo.length()];
         inputStream.read(bytesDaImagem);
