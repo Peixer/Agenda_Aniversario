@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -24,6 +25,8 @@ import br.glaicon.agenda_aniversarios.Contato.DataComparator;
 import br.glaicon.agenda_aniversarios.Contato.NomeComparator;
 import br.glaicon.agenda_aniversarios.DAO.ContatoDAO;
 import br.glaicon.agenda_aniversarios.DAO.TipoOrdenacao;
+
+import static android.app.Activity.RESULT_OK;
 
 public class PageFragment extends Fragment {
 
@@ -78,6 +81,22 @@ public class PageFragment extends Fragment {
         contatos.add(contato);
         Collections.sort(contatos, getComparator());
         contatoAdapterContatos.updateList();
+    }
+
+    public void atualizarContato(Contato contato) {
+        atualizarContatoComMesmoID(contato);
+        Collections.sort(contatos, getComparator());
+        contatoAdapterContatos.updateList();
+    }
+
+    private int atualizarContatoComMesmoID(Contato contatoParaEditar) {
+
+        for (int i = 0; i < contatos.size(); i++) {
+            if (contatos.get(i).getID() == contatoParaEditar.getID())
+                contatos.set(i, contatoParaEditar);
+        }
+
+        return 0;
     }
 
     private Comparator getComparator() {
@@ -142,10 +161,10 @@ public class PageFragment extends Fragment {
         listViewContatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ContatoActivity.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), ContatoActivity.class);
                 intent.putExtra("contato", (Contato) contatoAdapterContatos.getItem(position));
 
-                startActivityForResult(intent, ContatoActivity.ADICIONAR);
+                getActivity().startActivityForResult(intent, ContatoActivity.EDITAR);
             }
         });
 
@@ -163,6 +182,16 @@ public class PageFragment extends Fragment {
                 Toast.makeText(getActivity(), String.format("Contato %s - Data %s", contato.getNome(), DateFormat.getDateInstance().format(contato.getDate())), Toast.LENGTH_SHORT).show();
 
                 return true;
+            }
+        });
+
+        listViewContatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), ContatoActivity.class);
+                intent.putExtra("contato", (Contato) contatoAdapterContatos.getItem(position));
+
+                getActivity().startActivityForResult(intent, ContatoActivity.EDITAR);
             }
         });
 
@@ -185,13 +214,4 @@ public class PageFragment extends Fragment {
         outState.putInt(ARGS_TEXT, position);
     }
 
-    @Override
-    public void onActivityResult(int codigoRequisicao, int codigoResultado, Intent intent) {
-
-        if (codigoRequisicao == ContatoActivity.ADICIONAR) {
-            contatoAdapterContatos.updateList();
-        }
-
-        super.onActivityResult(codigoRequisicao, codigoResultado, intent);
-    }
 }

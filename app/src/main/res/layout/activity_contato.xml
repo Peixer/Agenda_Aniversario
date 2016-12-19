@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_aniversario"
-            android:onClick="adicionaAniversario"
+            android:onClick="exibirDatePickerDialog_onClick"
             android:layout_below="@+id/edtEmail"
             android:layout_alignParentStart="true" />
 
@@ -60,7 +60,7 @@
             android:layout_height="150dp"
             android:baselineAlignBottom="true"
             android:clickable="true"
-            android:onClick="onClick"
+            android:onClick="recortarImagem_onClick"
             android:src="@drawable/user"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:onClick="adicionar"
+        android:onClick="adicionarContato_onClick"
         android:text="@string/btn_adicionar" />
 
 </RelativeLayout>

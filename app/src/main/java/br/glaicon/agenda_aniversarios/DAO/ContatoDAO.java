@@ -91,21 +91,31 @@ public class ContatoDAO {
         values.put(ConstantesSQL.COLUMN_URI, contato.getUriFoto());
         values.put(ConstantesSQL.COLUMN_UUID, contato.getUUID().toString());
 
-        dataBase.insert(ConstantesSQL.DB_TABLE, null, values);
+        long id = dataBase.insert(ConstantesSQL.DB_TABLE, null, values);
+        contato.setID(id);
     }
 
-    public void DropDataBase() {
+    public void atualizarContato(Contato contato) {
         SQLiteDatabase dataBase = helper.getWritableDatabase();
-        dataBase.delete(ConstantesSQL.DB_TABLE, null, null);
+
+        ContentValues values = new ContentValues();
+        values.put(ConstantesSQL.COLUMN_NOME, contato.getNome());
+        values.put(ConstantesSQL.COLUMN_DATE, contato.getDate().getTime());
+        values.put(ConstantesSQL.COLUMN_EMAIL, contato.getEmail());
+        values.put(ConstantesSQL.COLUMN_URI, contato.getUriFoto());
+        values.put(ConstantesSQL.COLUMN_UUID, contato.getUUID().toString());
+
+        dataBase.update(ConstantesSQL.DB_TABLE, values, "_ID = ?", new String[]{String.valueOf(contato.getID())});
     }
 
     private Contato getContato(Cursor cursor) {
+        long id = cursor.getLong(0);
         String nome = cursor.getString(1);
         Date date = new Date(cursor.getLong(2));
         String email = cursor.getString(3);
         String uri = cursor.getString(4);
         String uuid = cursor.getString(5);
 
-        return new Contato(nome, date, email, uri, uuid);
+        return new Contato(id, nome, date, email, uri, uuid);
     }
 }

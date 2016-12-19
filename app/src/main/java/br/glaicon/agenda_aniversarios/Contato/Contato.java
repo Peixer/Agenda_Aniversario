@@ -12,6 +12,7 @@ public class Contato implements Serializable, Comparable<Contato> {
     private String email;
     private String uriFoto;
     private UUID UUID;
+    private long ID;
 
     public Contato(){
         UUID = java.util.UUID.randomUUID();
@@ -25,7 +26,8 @@ public class Contato implements Serializable, Comparable<Contato> {
         setNome(nome);
     }
 
-    public Contato(String nome, Date date, String email, String uriFoto, String uuid) {
+    public Contato(long id, String nome, Date date, String email, String uriFoto, String uuid) {
+        setID(id);
         setDate(date);
         setEmail(email);
         setNome(nome);
@@ -80,6 +82,14 @@ public class Contato implements Serializable, Comparable<Contato> {
         this.uriFoto = uriFoto;
     }
 
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
+    }
+
     public boolean estaDeAniversario() {
         Calendar calendarAtual = Calendar.getInstance();
         Calendar calendar = Calendar.getInstance();
@@ -90,6 +100,7 @@ public class Contato implements Serializable, Comparable<Contato> {
     @Override
     public int compareTo(Contato contato) {
 
+        //todo rever essa comparação aqui
         Calendar calendarAtual = Calendar.getInstance();
         Calendar calendar1 = Calendar.getInstance();
         calendar1.setTime(date);

@@ -107,7 +107,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                 if (position == 0) {
                     Intent intent = new Intent(getApplicationContext(), ContatoActivity.class);
                     startActivityForResult(intent, ContatoActivity.ADICIONAR);
-                }else if (position == 1) {
+                } else if (position == 1) {
                     Intent intent = new Intent(getApplicationContext(), ImportarActivity.class);
                     startActivity(intent);
                 } else if (position == 2) {
@@ -295,7 +295,6 @@ public class MainActivity extends ActionBarActivity implements android.support.v
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ContatoActivity.ADICIONAR && resultCode == RESULT_OK) {
             Contato contato = (Contato) data.getSerializableExtra("contato");
-            contatoDAO.addContato(contato);
 
             for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                 if (fragment instanceof PageFragment) {
@@ -303,7 +302,18 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                     pageFragment.addContato(contato);
                 }
             }
+        } else if (requestCode == ContatoActivity.EDITAR && resultCode == RESULT_OK) {
+            Contato contato = (Contato) data.getSerializableExtra("contato");
+
+            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                if (fragment instanceof PageFragment) {
+                    PageFragment pageFragment = (PageFragment) fragment;
+                    pageFragment.atualizarContato(contato);
+                }
+            }
         }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
