@@ -28,4 +28,5 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.rabbitmq:amqp-client:4.0.0'
 }

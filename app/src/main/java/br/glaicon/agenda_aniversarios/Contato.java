@@ -6,8 +6,10 @@ import java.util.Date;
 
 public class Contato implements Serializable, Comparable<Contato> {
 
-    public Contato() {
-    }
+    private String nome;
+    private Date date;
+    private String email;
+    private String uriFoto;
 
     public Contato(String nome, Date date, String email) {
         setDate(date);
@@ -22,10 +24,12 @@ public class Contato implements Serializable, Comparable<Contato> {
         setUriFoto(uriFoto);
     }
 
-    private String nome;
-    private Date date;
-    private String email;
-    private String uriFoto;
+    public Contato(ContatoMensageria contato) {
+        this.nome = contato.getNome();
+        this.email = contato.getEmail();
+        this.date = contato.getDate();
+        this.uriFoto = contato.getUriFoto();
+    }
 
     public String getNome() {
         return nome;
@@ -116,4 +120,5 @@ public class Contato implements Serializable, Comparable<Contato> {
         calendar.setTime(this.date);
         return calendar.get(Calendar.DAY_OF_MONTH) == calendarAtual.get(Calendar.DAY_OF_MONTH) && calendar.get(Calendar.MONTH) == calendarAtual.get(Calendar.MONTH);
     }
+
 }

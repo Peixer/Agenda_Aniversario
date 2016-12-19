@@ -38,4 +38,5 @@
 
     <string name="crop__done">Feito</string>
     <string name="crop__cancel" tools:ignore="ButtonCase">Cancelar</string>
+    <string name="title_activity_exportar">ExportarActivity</string>
 </resources>

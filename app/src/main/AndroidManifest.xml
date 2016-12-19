@@ -28,7 +28,6 @@
                 android:resource="@xml/searchable"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
             android:name=".SobreActivity"
             android:label="@string/title_activity_sobre" />
@@ -36,7 +35,6 @@
             android:name=".ContatoActivity"
             android:label="@string/title_activity_contato"
             android:parentActivityName=".MainActivity" />
-
         <activity android:name=".Crop.CropImageActivity" />
 
         <receiver
@@ -51,8 +49,11 @@
         <activity
             android:name=".ImportarActivity"
             android:label="@string/title_activity_importar_activity"
-            android:parentActivityName=".MainActivity">
-        </activity>
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".ExportarActivity"
+            android:label="@string/title_activity_exportar"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

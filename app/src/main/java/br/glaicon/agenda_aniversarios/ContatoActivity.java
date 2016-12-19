@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -32,10 +31,15 @@ public class ContatoActivity extends ActionBarActivity {
     EditText edtEmail;
     EditText edtAniversario;
     ImageView image;
+    ImagemHelper imagemHelper;
     long date = 0;
     Uri Uri = android.net.Uri.EMPTY;
     public static int ADICIONAR = 100;
     BitmapCache bitmapCache = AppController.getInstance().getBitmapCache();
+
+    public String ObterNomeDoContato() {
+        return edtNome.getText().toString();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +57,13 @@ public class ContatoActivity extends ActionBarActivity {
             }
         });
 
+        imagemHelper = new ImagemHelper(this);
         image = (ImageView) findViewById(R.id.imageView);
 
+        ExtrairContatoDoExtra();
+    }
+
+    private void ExtrairContatoDoExtra() {
         final Contato contato = (Contato) getIntent().getSerializableExtra("contato");
         if (contato != null) {
             edtNome.setText(contato.getNome());
@@ -62,7 +71,7 @@ public class ContatoActivity extends ActionBarActivity {
             edtAniversario.setText(DateFormat.getDateInstance().format(contato.getDate()));
 
             if (contato.getUriFoto() != "") {
-                AbreImagem(contato.getUriFoto());
+                image.setImageDrawable(new RoundImage(imagemHelper.obterBitmapDaImagemDoContato(contato.getUriFoto())));
             }
         }
     }
@@ -74,26 +83,11 @@ public class ContatoActivity extends ActionBarActivity {
         else
             dateAdd = new Date();
 
-        Contato contato = new Contato(edtNome.getText().toString(), dateAdd, edtEmail.getText().toString(), getCaminhoImagem());
+        Contato contato = new Contato(ObterNomeDoContato(), dateAdd, edtEmail.getText().toString(), imagemHelper.obterCaminhoDaImagemDoContato(ObterNomeDoContato()));
         Intent returnIntent = new Intent();
         returnIntent.putExtra("contato", contato);
         setResult(RESULT_OK, returnIntent);
         finish();
-    }
-
-    private String getCaminhoImagem() throws IOException {
-        return getDirectoryBase() + "//" + edtNome.getText();
-    }
-
-    private void AbreImagem(String result) {
-        try {
-            FileInputStream inputStream = new FileInputStream(result);
-            Bitmap myBitmap = BitmapFactory.decodeStream(inputStream);
-            image.setImageDrawable(new RoundImage(myBitmap));
-            inputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void adicionaAniversario(View view) {
@@ -136,7 +130,7 @@ public class ContatoActivity extends ActionBarActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == Crop.REQUEST_PICK)
                 try {
-                    Crop.of(data.getData(), android.net.Uri.fromFile(getFile())).asSquare().start(this);
+                    Crop.of(data.getData(), android.net.Uri.fromFile(imagemHelper.obterImagemPeloNomeDoContato(ObterNomeDoContato()))).asSquare().start(this);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -148,7 +142,7 @@ public class ContatoActivity extends ActionBarActivity {
                 try {
                     inputStream = new FileInputStream(Uri.getPath());
                     Bitmap myBitmap = BitmapFactory.decodeStream(inputStream);
-                    bitmapCache.remove(edtNome.getText().toString());
+                    bitmapCache.remove(ObterNomeDoContato());
                     image.setImageDrawable(new RoundImage(myBitmap));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -162,21 +156,5 @@ public class ContatoActivity extends ActionBarActivity {
                 }
             }
         }
-    }
-
-    private File getFile() throws IOException {
-        File file = new File(getDirectoryBase());
-        if (!file.exists())
-            file.mkdir();
-
-        File fileImagem = new File(getDirectoryBase() + "//" + edtNome.getText());
-        if (!fileImagem.exists())
-            fileImagem.createNewFile();
-
-        return fileImagem;
-    }
-
-    private String getDirectoryBase() {
-        return getFilesDir() + "//Imagem";
     }
 }

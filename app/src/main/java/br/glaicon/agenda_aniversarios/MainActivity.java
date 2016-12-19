@@ -105,7 +105,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                     Intent intent = new Intent(getApplicationContext(), ImportarActivity.class);
                     startActivity(intent);
                 } else if (position == 2) {
-                    Intent intent = new Intent(getApplicationContext(), SobreActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ExportarActivity.class);
                     startActivity(intent);
                 } else if (position == 3) {
                     Intent intent = new Intent(getApplicationContext(), SobreActivity.class);
