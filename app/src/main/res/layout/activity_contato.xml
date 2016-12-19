@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context="br.glaicon.agenda_aniversarios.ContatoActivity">
+    tools:context="br.glaicon.agenda_aniversarios.Acitivity.ContatoActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:id="@+id/edtNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="30dp"
             android:elegantTextHeight="false"
             android:hint="@string/hint_nome"
             android:inputType="textPersonName"
@@ -56,15 +56,15 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
             android:baselineAlignBottom="true"
             android:clickable="true"
             android:onClick="onClick"
             android:src="@drawable/user"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="43dp" />
+            android:layout_marginTop="33dp" />
 
     </RelativeLayout>
 

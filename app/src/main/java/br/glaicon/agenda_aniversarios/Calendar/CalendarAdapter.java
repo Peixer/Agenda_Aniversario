@@ -1,5 +1,5 @@
 
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Calendar;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import br.glaicon.agenda_aniversarios.Contato.Contato;
+import br.glaicon.agenda_aniversarios.R;
 
 public class CalendarAdapter extends BaseAdapter {
     static final int FIRST_DAY_OF_WEEK = 0; // Sunday = 0, Monday = 1

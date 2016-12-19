@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Acitivity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +21,11 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 
+import br.glaicon.agenda_aniversarios.Contato.Contato;
+import br.glaicon.agenda_aniversarios.DAO.ContatoDAO;
+import br.glaicon.agenda_aniversarios.Contato.ContatoMensageria;
+import br.glaicon.agenda_aniversarios.R;
+
 public class ImportarActivity extends ActionBarActivity {
 
 
@@ -28,6 +33,7 @@ public class ImportarActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_importar_activity);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -72,7 +78,7 @@ public class ImportarActivity extends ActionBarActivity {
     }
 
     private void setupConnectionFactory(ConnectionFactory factory) throws NoSuchAlgorithmException, KeyManagementException, URISyntaxException {
-        factory.setUri("XXXXXX");
+        factory.setUri("XXXXX");
     }
 
     private ContatoMensageria deserialize(byte[] bytes) throws IOException, ClassNotFoundException {

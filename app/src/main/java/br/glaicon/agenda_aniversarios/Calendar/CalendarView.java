@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Calendar;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import br.glaicon.agenda_aniversarios.Contato.Contato;
+import br.glaicon.agenda_aniversarios.R;
 
 public class CalendarView extends Fragment {
 

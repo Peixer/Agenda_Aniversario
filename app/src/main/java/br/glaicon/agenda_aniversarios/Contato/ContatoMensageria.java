@@ -1,6 +1,5 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Contato;
 
-import android.app.Application;
 import android.content.Context;
 
 import java.io.File;
@@ -10,7 +9,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
+
+import br.glaicon.agenda_aniversarios.ImagemHelper;
 
 public class ContatoMensageria implements Serializable {
 

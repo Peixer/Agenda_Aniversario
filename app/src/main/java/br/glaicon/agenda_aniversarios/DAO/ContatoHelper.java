@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.DAO;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

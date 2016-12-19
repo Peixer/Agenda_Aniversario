@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Contato;
 
 import java.util.Comparator;
 

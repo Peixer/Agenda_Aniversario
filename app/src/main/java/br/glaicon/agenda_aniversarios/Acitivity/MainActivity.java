@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Acitivity;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -25,6 +25,12 @@ import android.widget.ListView;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+
+import br.glaicon.agenda_aniversarios.Contato.Contato;
+import br.glaicon.agenda_aniversarios.DAO.ContatoDAO;
+import br.glaicon.agenda_aniversarios.PageFragment;
+import br.glaicon.agenda_aniversarios.R;
+import br.glaicon.agenda_aniversarios.DAO.TipoOrdenacao;
 
 public class MainActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener {
 
@@ -205,15 +211,15 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                 item.setTitle(titulo);
 
                 for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-                    if (fragment instanceof PageFragment && ((PageFragment) fragment).getPosition() == 0 && ((PageFragment) fragment).listViewContatos != null) {
+                    if (fragment instanceof PageFragment && ((PageFragment) fragment).getPosition() == 0 && ((PageFragment) fragment).getListViewContatos() != null) {
                         View calendarView = fragment.getView().findViewById(R.id.fragment_calendar);
 
                         if (ativarVisibilidadeCalendario) {
                             calendarView.setVisibility(View.VISIBLE);
-                            ((PageFragment) fragment).listViewContatos.setVisibility(View.INVISIBLE);
+                            ((PageFragment) fragment).getListViewContatos().setVisibility(View.INVISIBLE);
                         } else {
                             calendarView.setVisibility(View.INVISIBLE);
-                            ((PageFragment) fragment).listViewContatos.setVisibility(View.VISIBLE);
+                            ((PageFragment) fragment).getListViewContatos().setVisibility(View.VISIBLE);
                         }
                     }
                 }

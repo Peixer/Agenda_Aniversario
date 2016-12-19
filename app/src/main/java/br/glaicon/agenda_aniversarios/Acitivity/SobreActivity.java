@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Acitivity;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import java.util.List;
+
+import br.glaicon.agenda_aniversarios.R;
 
 public class SobreActivity extends ActionBarActivity {
 

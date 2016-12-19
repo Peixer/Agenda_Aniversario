@@ -6,7 +6,7 @@
     android:gravity="fill"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context="br.glaicon.agenda_aniversarios.SobreActivity">
+    tools:context="br.glaicon.agenda_aniversarios.Acitivity.SobreActivity">
 
     <TextView
         android:id="@+id/textView"

@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Acitivity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -21,7 +21,11 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import br.glaicon.agenda_aniversarios.Contato.Contato;
 import br.glaicon.agenda_aniversarios.Crop.Crop;
+import br.glaicon.agenda_aniversarios.ImagemHelper;
+import br.glaicon.agenda_aniversarios.R;
+import br.glaicon.agenda_aniversarios.RoundImage;
 import br.glaicon.agenda_aniversarios.Volley.AppController;
 import br.glaicon.agenda_aniversarios.Volley.BitmapCache;
 

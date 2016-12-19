@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Contato;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,9 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import br.glaicon.agenda_aniversarios.DAO.TipoOrdenacao;
+import br.glaicon.agenda_aniversarios.R;
+import br.glaicon.agenda_aniversarios.RoundImage;
 import br.glaicon.agenda_aniversarios.Volley.AppController;
 import br.glaicon.agenda_aniversarios.Volley.BitmapCache;
 import br.glaicon.agenda_aniversarios.Volley.ImageUtil;

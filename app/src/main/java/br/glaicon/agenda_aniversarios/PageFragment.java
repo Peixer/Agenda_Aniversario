@@ -16,13 +16,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import br.glaicon.agenda_aniversarios.Acitivity.ContatoActivity;
+import br.glaicon.agenda_aniversarios.Calendar.CalendarView;
+import br.glaicon.agenda_aniversarios.Contato.Contato;
+import br.glaicon.agenda_aniversarios.Contato.ContatoAdapter;
+import br.glaicon.agenda_aniversarios.Contato.DataComparator;
+import br.glaicon.agenda_aniversarios.Contato.NomeComparator;
+import br.glaicon.agenda_aniversarios.DAO.ContatoDAO;
+import br.glaicon.agenda_aniversarios.DAO.TipoOrdenacao;
+
 public class PageFragment extends Fragment {
 
     private int position;
     private final String ARGS_TEXT = "fragmentPos";
 
     ContatoDAO contatoDAO;
-
     ListView listViewContatos;
     ContatoAdapter contatoAdapterContatos;
     ArrayList<Contato> contatos;
@@ -77,6 +85,10 @@ public class PageFragment extends Fragment {
             return dataComparator;
 
         return nomeComparator;
+    }
+
+    public ListView getListViewContatos() {
+        return listViewContatos;
     }
 
     private TipoOrdenacao getTipoOrdenacao() {

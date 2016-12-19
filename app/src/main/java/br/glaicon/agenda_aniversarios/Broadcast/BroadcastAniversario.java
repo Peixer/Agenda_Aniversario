@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Broadcast;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -10,6 +10,12 @@ import android.support.v4.app.NotificationCompat;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+
+import br.glaicon.agenda_aniversarios.Acitivity.MainActivity;
+import br.glaicon.agenda_aniversarios.Contato.Contato;
+import br.glaicon.agenda_aniversarios.DAO.ContatoDAO;
+import br.glaicon.agenda_aniversarios.DAO.TipoOrdenacao;
+import br.glaicon.agenda_aniversarios.R;
 
 public class BroadcastAniversario extends BroadcastReceiver {
 

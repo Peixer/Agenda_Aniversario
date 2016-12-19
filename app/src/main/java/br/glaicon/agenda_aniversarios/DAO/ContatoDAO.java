@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,7 +9,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import br.glaicon.agenda_aniversarios.Contato.Contato;
 
 public class ContatoDAO {
     private ContatoHelper helper;

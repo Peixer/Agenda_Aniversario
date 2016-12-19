@@ -1,4 +1,4 @@
-package br.glaicon.agenda_aniversarios;
+package br.glaicon.agenda_aniversarios.Acitivity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +19,12 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.ArrayList;
+
+import br.glaicon.agenda_aniversarios.Contato.Contato;
+import br.glaicon.agenda_aniversarios.DAO.ContatoDAO;
+import br.glaicon.agenda_aniversarios.Contato.ContatoMensageria;
+import br.glaicon.agenda_aniversarios.R;
+import br.glaicon.agenda_aniversarios.DAO.TipoOrdenacao;
 
 public class ExportarActivity extends ActionBarActivity {
 
