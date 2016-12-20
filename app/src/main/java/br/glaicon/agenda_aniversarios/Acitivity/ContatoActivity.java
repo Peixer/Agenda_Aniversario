@@ -3,8 +3,6 @@ package br.glaicon.agenda_aniversarios.Acitivity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -38,7 +35,7 @@ public class ContatoActivity extends ActionBarActivity {
     EditText edtEmail;
     Button btnAdicionar;
     EditText edtAniversario;
-    ImageView image;
+    ImageView imageView;
     ImagemHelper imagemHelper;
 
     Contato contato;
@@ -48,7 +45,8 @@ public class ContatoActivity extends ActionBarActivity {
     BitmapCache bitmapCache = AppController.getInstance().getBitmapCache();
 
     public Contato getContato() {
-        if (contato == null) contato = new Contato();
+        if (contato == null)
+            contato = new Contato();
 
         return contato;
     }
@@ -67,14 +65,17 @@ public class ContatoActivity extends ActionBarActivity {
         setContentView(R.layout.activity_contato);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         contatoDAO = ContatoDAO.getInstance(getApplicationContext());
-
+        imagemHelper = new ImagemHelper(this.getApplicationContext());
 
         edtNome = (EditText) findViewById(R.id.edtNome);
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         btnAdicionar = (Button) findViewById(R.id.btnAdd);
         edtAniversario = (EditText) findViewById(R.id.edtAniversario);
+        imageView = (ImageView) findViewById(R.id.imageView);
 
-        edtAniversario.setText(DateFormat.getDateInstance().format(new Date()));
+        Date dataInicial = new Date();
+        date = dataInicial.getTime();
+        edtAniversario.setText(DateFormat.getDateInstance().format(dataInicial));
         edtAniversario.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -82,9 +83,6 @@ public class ContatoActivity extends ActionBarActivity {
                     edtAniversario.callOnClick();
             }
         });
-
-        imagemHelper = new ImagemHelper(this);
-        image = (ImageView) findViewById(R.id.imageView);
 
         extrairContatoDoExtra();
     }
@@ -99,7 +97,7 @@ public class ContatoActivity extends ActionBarActivity {
             edtAniversario.setText(DateFormat.getDateInstance().format(contato.getDate()));
 
             if (contato.getUriFoto() != "") {
-                image.setImageDrawable(new RoundImage(imagemHelper.obterBitmapDaImagemDoContato(contato.getUriFoto())));
+                imageView.setImageDrawable(imagemHelper.obterRoundImagemDoContato(contato, bitmapCache, this.getResources()));
             }
 
             btnAdicionar.setText("Editar");
@@ -112,16 +110,20 @@ public class ContatoActivity extends ActionBarActivity {
         getContato().setEmail(edtEmail.getText().toString());
         getContato().setUriFoto(imagemHelper.obterCaminhoDaImagemDoContato(getContato().getUUID().toString()));
 
-        if (getContato().getID() > 0) {
-            contatoDAO.atualizarContato(getContato());
-        } else {
-            contatoDAO.addContato(getContato());
-        }
+        persistirContato();
 
         Intent returnIntent = new Intent(this, MainActivity.class);
         returnIntent.putExtra("contato", getContato());
         setResult(RESULT_OK, returnIntent);
         finish();
+    }
+
+    private void persistirContato() {
+        if (getContato().getID() > 0) {
+            contatoDAO.atualizarContato(getContato());
+        } else {
+            contatoDAO.addContato(getContato());
+        }
     }
 
     public void exibirDatePickerDialog_onClick(View view) {
@@ -166,22 +168,7 @@ public class ContatoActivity extends ActionBarActivity {
     private void setarImagemAoContato(Intent data) {
         Bundle bundle = data.getExtras();
         Uri = (Uri) bundle.get(MediaStore.EXTRA_OUTPUT);
-
-        FileInputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream(Uri.getPath());
-            Bitmap myBitmap = BitmapFactory.decodeStream(inputStream);
-            bitmapCache.remove(obterNomeDoContato());
-            image.setImageDrawable(new RoundImage(myBitmap));
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (inputStream != null)
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-        }
+        RoundImage image = imagemHelper.obterRoundImageDeUmaURI(Uri, getContato(), bitmapCache, this.getResources());
+        imageView.setImageDrawable(image);
     }
 }

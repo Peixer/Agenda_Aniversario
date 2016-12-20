@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.glaicon.agenda_aniversarios.DAO.TipoOrdenacao;
+import br.glaicon.agenda_aniversarios.ImagemHelper;
 import br.glaicon.agenda_aniversarios.R;
 import br.glaicon.agenda_aniversarios.RoundImage;
 import br.glaicon.agenda_aniversarios.Volley.AppController;
@@ -31,11 +32,14 @@ public class ContatoAdapter extends BaseAdapter {
     private Resources resource;
     private TipoOrdenacao tipo;
     BitmapCache bitmapCache = AppController.getInstance().getBitmapCache();
+    ImagemHelper imagemHelper;
 
     public ContatoAdapter(Activity activity, List<Contato> contatos, TipoOrdenacao tipo) {
         this.activity = activity;
         this.contatos = contatos;
         this.tipo = tipo;
+
+        imagemHelper = new ImagemHelper(activity.getApplicationContext());
     }
 
     @Override
@@ -95,25 +99,7 @@ public class ContatoAdapter extends BaseAdapter {
             contatoVH.txtEmail.setText(DateFormat.getDateInstance().format(calendar.getTime()));
         }
 
-        contatoVH.imageView.setImageDrawable(getBitmap(contato));
-    }
-
-    private RoundImage getBitmap(Contato contato) {
-        Bitmap bitmap = null;
-        if (contato.getUriFoto() != "") {
-            bitmap = bitmapCache.getBitmap(contato.getNome());
-
-            if (bitmap == null) {
-                bitmap = BitmapFactory.decodeFile(contato.getUriFoto());
-
-                bitmap = ImageUtil.ResizedBitmap(bitmap);
-
-                bitmapCache.putBitmap(contato.getNome(), bitmap);
-            }
-        } else
-            bitmap = ((BitmapDrawable) resource.getDrawable(R.drawable.user)).getBitmap();
-
-        return new RoundImage(bitmap);
+        contatoVH.imageView.setImageDrawable(imagemHelper.obterRoundImagemDoContato(contato, bitmapCache, resource));
     }
 
     static class ContatoViewHolder {
