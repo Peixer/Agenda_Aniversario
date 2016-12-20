@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -57,6 +58,10 @@ public class ContatoActivity extends ActionBarActivity {
 
     public String obterNomeDoContato() {
         return edtNome.getText().toString();
+    }
+
+    public String obterNomeArquivoTemporario() {
+        return contato.getUUID().toString() + "_temp";
     }
 
     @Override
@@ -111,6 +116,8 @@ public class ContatoActivity extends ActionBarActivity {
             getContato().setNome(obterNomeDoContato());
             getContato().setDate(new Date(date));
             getContato().setEmail(edtEmail.getText().toString());
+
+            renomearFotoTemporaria();
             getContato().setUriFoto(imagemHelper.obterCaminhoDaImagemDoContato(getContato().getUUID().toString()));
 
             persistirContato();
@@ -120,6 +127,12 @@ public class ContatoActivity extends ActionBarActivity {
             setResult(RESULT_OK, returnIntent);
             finish();
         }
+    }
+
+    private void renomearFotoTemporaria() {
+        File from = new File(obterNomeArquivoTemporario());
+        File to = new File(imagemHelper.obterCaminhoDaImagemDoContato(getContato().getUUID().toString()));
+        from.renameTo(to);
     }
 
     private boolean validarCampos() {
@@ -177,17 +190,17 @@ public class ContatoActivity extends ActionBarActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == Crop.REQUEST_PICK)
                 try {
-                    Crop.of(data.getData(), android.net.Uri.fromFile(imagemHelper.obterImagemPeloNomeDoContato(getContato().getUUID().toString()))).asSquare().start(this);
+                    Crop.of(data.getData(), android.net.Uri.fromFile(imagemHelper.obterImagemPeloNomeDoContato(obterNomeArquivoTemporario()))).asSquare().start(this);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             else if (requestCode == Crop.REQUEST_CROP) {
-                setarImagemAoContato(data);
+                atribuirImagemAoContato(data);
             }
         }
     }
 
-    private void setarImagemAoContato(Intent data) {
+    private void atribuirImagemAoContato(Intent data) {
         Bundle bundle = data.getExtras();
         Uri = (Uri) bundle.get(MediaStore.EXTRA_OUTPUT);
         RoundImage image = imagemHelper.obterRoundImageDeUmaURI(Uri, getContato(), bitmapCache, this.getResources());
