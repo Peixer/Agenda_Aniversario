@@ -1,6 +1,7 @@
 package br.glaicon.agenda_aniversarios.Calendar;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import br.glaicon.agenda_aniversarios.Acitivity.ContatoActivity;
 import br.glaicon.agenda_aniversarios.Contato.Contato;
 import br.glaicon.agenda_aniversarios.R;
 
@@ -92,21 +94,31 @@ public class CalendarView extends Fragment {
                     Calendar calendarDataAniversariante = Calendar.getInstance();
                     calendarDataAniversariante.setTime(contato.getDate());
 
-                    if (String.valueOf(calendarDataAniversariante.get(Calendar.DAY_OF_MONTH)).equals(date.getText()) &&
-                            calendarDataAniversariante.get(Calendar.MONTH) == calendar.get(Calendar.MONTH))
+                    if (String.valueOf(calendarDataAniversariante.get(Calendar.DAY_OF_MONTH)).equals(date.getText()) && calendarDataAniversariante.get(Calendar.MONTH) == calendar.get(Calendar.MONTH))
                         contatosDeAniversario.add(contato);
                 }
 
                 exibirDialogAniversariantes(contatosDeAniversario);
             }
 
-            private void exibirDialogAniversariantes(ArrayList<Contato> contatosDeAniversario) {
+            private void exibirDialogAniversariantes(final ArrayList<Contato> contatosDeAniversario) {
                 Dialog dialog = new Dialog(getActivity());
                 dialog.setTitle(getString(R.string.aniversariantes));
                 dialog.setContentView(R.layout.calendar_listview);
 
                 ListView listViewAniversariantes = (ListView) dialog.findViewById(R.id.list_calendar);
                 listViewAniversariantes.setAdapter(new ListCalendarAdapter(getActivity(), contatosDeAniversario));
+
+                listViewAniversariantes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getActivity().getApplicationContext(), ContatoActivity.class);
+                        intent.putExtra("contato", (Contato) contatosDeAniversario.get(position));
+
+                        getActivity().startActivityForResult(intent, ContatoActivity.EDITAR);
+                    }
+                });
+
 
                 dialog.show();
             }

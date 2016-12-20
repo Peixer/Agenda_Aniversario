@@ -1,12 +1,18 @@
 package br.glaicon.agenda_aniversarios;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
+import br.glaicon.agenda_aniversarios.Contato.Contato;
+import br.glaicon.agenda_aniversarios.Volley.BitmapCache;
+import br.glaicon.agenda_aniversarios.Volley.ImageUtil;
 
 public class ImagemHelper {
 
@@ -46,7 +52,7 @@ public class ImagemHelper {
         return bytesDaImagem;
     }
 
-    public Bitmap obterBitmapDaImagemDoContato(String uriFoto){
+    public Bitmap obterBitmapDaImagemDoContato(String uriFoto) {
         Bitmap bitmapDaImagem = null;
         try {
             FileInputStream inputStream = new FileInputStream(uriFoto);
@@ -57,6 +63,25 @@ public class ImagemHelper {
         }
 
         return bitmapDaImagem;
+    }
+
+    public RoundImage obterRoundImagemDoContato(Contato contato, BitmapCache bitmapCache, Resources resource) {
+        Bitmap bitmap = null;
+        if (contato.getUriFoto() != "") {
+            bitmap = bitmapCache.getBitmap(contato.getNome());
+
+            if (bitmap == null) {
+                bitmap = BitmapFactory.decodeFile(contato.getUriFoto());
+
+                bitmap = ImageUtil.ResizedBitmap(bitmap);
+
+                bitmapCache.putBitmap(contato.getNome(), bitmap);
+            }
+        } else {
+            bitmap = ((BitmapDrawable) resource.getDrawable(R.drawable.user)).getBitmap();
+        }
+
+        return new RoundImage(bitmap);
     }
 }
 

@@ -3,6 +3,7 @@ package br.glaicon.agenda_aniversarios.Calendar;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -19,17 +20,26 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.glaicon.agenda_aniversarios.Contato.Contato;
+import br.glaicon.agenda_aniversarios.ImagemHelper;
 import br.glaicon.agenda_aniversarios.R;
+import br.glaicon.agenda_aniversarios.RoundImage;
+import br.glaicon.agenda_aniversarios.Volley.AppController;
+import br.glaicon.agenda_aniversarios.Volley.BitmapCache;
+import br.glaicon.agenda_aniversarios.Volley.ImageUtil;
 
 public class ListCalendarAdapter extends BaseAdapter {
     ArrayList<Contato> contatos;
     Context context;
     Resources resource;
     LayoutInflater inflater = null;
+    ImagemHelper imagemHelper;
+    BitmapCache bitmapCache = AppController.getInstance().getBitmapCache();
 
     public ListCalendarAdapter(Context context, ArrayList<Contato> contatos) {
         this.contatos = contatos;
         this.context = context;
+
+        imagemHelper = new ImagemHelper(context);
     }
 
     @Override
@@ -70,27 +80,9 @@ public class ListCalendarAdapter extends BaseAdapter {
 
         Contato contato = (Contato) getItem(position);
         calendarVH.txtNome.setText(contato.getNome());
-        circularImagemDoAniversariante(calendarVH, resource.getDrawable(R.drawable.user));
+        calendarVH.image.setImageDrawable(imagemHelper.obterRoundImagemDoContato(contato, bitmapCache, resource));
 
         return convertView;
-    }
-
-    private void circularImagemDoAniversariante(CalendarViewHolder contato, Drawable drawable) {
-        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-
-        Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Paint paint = new Paint();
-        paint.setStrokeWidth(5);
-        Canvas c = new Canvas(circleBitmap);
-
-        c.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
-        BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-        paint.setAntiAlias(true);
-        paint.setShader(shader);
-
-        c.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
-
-        contato.image.setImageBitmap(circleBitmap);
     }
 
     static class CalendarViewHolder {
