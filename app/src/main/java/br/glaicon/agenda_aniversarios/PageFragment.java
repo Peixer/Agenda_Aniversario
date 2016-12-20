@@ -31,7 +31,6 @@ import static android.app.Activity.RESULT_OK;
 public class PageFragment extends Fragment {
 
     private int position;
-    private final String ARGS_TEXT = "fragmentPos";
 
     ContatoDAO contatoDAO;
     ListView listViewContatos;
@@ -45,20 +44,18 @@ public class PageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState == null) {
-            contatoDAO = ContatoDAO.getInstance(getActivity());
+        contatoDAO = ContatoDAO.getInstance(getActivity());
 
-            try {
-                contatos = contatoDAO.buscarContatos(getTipoOrdenacao());
+        try {
+            contatos = contatoDAO.buscarContatos(getTipoOrdenacao());
 
-                if (position == 0)
-                    Collections.sort(contatos, dataComparator);
+            if (position == 0)
+                Collections.sort(contatos, dataComparator);
 
-                contatoAdapterContatos = new ContatoAdapter(getActivity(), contatos, getTipoOrdenacao());
+            contatoAdapterContatos = new ContatoAdapter(getActivity(), contatos, getTipoOrdenacao());
 
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -207,11 +204,4 @@ public class PageFragment extends Fragment {
         f.position = index;
         return f;
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(ARGS_TEXT, position);
-    }
-
 }
