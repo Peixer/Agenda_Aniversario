@@ -105,17 +105,39 @@ public class ContatoActivity extends ActionBarActivity {
     }
 
     public void adicionarContato_onClick(View view) throws IOException {
-        getContato().setNome(obterNomeDoContato());
-        getContato().setDate(new Date(date));
-        getContato().setEmail(edtEmail.getText().toString());
-        getContato().setUriFoto(imagemHelper.obterCaminhoDaImagemDoContato(getContato().getUUID().toString()));
 
-        persistirContato();
+        if (validarCampos()) {
 
-        Intent returnIntent = new Intent(this, MainActivity.class);
-        returnIntent.putExtra("contato", getContato());
-        setResult(RESULT_OK, returnIntent);
-        finish();
+            getContato().setNome(obterNomeDoContato());
+            getContato().setDate(new Date(date));
+            getContato().setEmail(edtEmail.getText().toString());
+            getContato().setUriFoto(imagemHelper.obterCaminhoDaImagemDoContato(getContato().getUUID().toString()));
+
+            persistirContato();
+
+            Intent returnIntent = new Intent(this, MainActivity.class);
+            returnIntent.putExtra("contato", getContato());
+            setResult(RESULT_OK, returnIntent);
+            finish();
+        }
+    }
+
+    private boolean validarCampos() {
+        boolean estaValido = true;
+        if (!ehEmailValido()) {
+            edtEmail.setError(getString(R.string.error_email));
+            estaValido = false;
+        }
+        if (edtNome.getText().toString().trim().isEmpty()) {
+            edtNome.setError(getString(R.string.error_nome));
+            estaValido = false;
+        }
+
+        return estaValido;
+    }
+
+    private boolean ehEmailValido() {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(edtEmail.getText().toString()).matches();
     }
 
     private void persistirContato() {
