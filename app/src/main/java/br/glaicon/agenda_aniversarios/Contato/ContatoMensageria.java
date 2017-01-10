@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 import br.glaicon.agenda_aniversarios.ImagemHelper;
 
@@ -51,8 +52,6 @@ public class ContatoMensageria implements Serializable {
 
     public ImagemHelper getImagemHelper() {
         if (imagemHelper == null) {
-            Thread thread = new Thread();
-
             imagemHelper = new ImagemHelper(context);
         }
 
@@ -69,13 +68,22 @@ public class ContatoMensageria implements Serializable {
         UUID = java.util.UUID.fromString(contato.getUUID().toString());
     }
 
+    public ContatoMensageria(Context context, ContatoDTO contatoDTO){
+        this(context);
+
+        nome = contatoDTO.nome;
+        email = contatoDTO.email;
+        date = contatoDTO.date;
+        bytesDaFoto = contatoDTO.bytesDaFoto;
+        UUID = java.util.UUID.fromString(contatoDTO.UUID);
+    }
+
     private void writeObject(ObjectOutputStream o)
             throws IOException {
 
         o.writeObject(nome);
         o.writeObject(date);
         o.writeObject(email);
-        o.writeObject(UUID.toString());
         o.writeObject(getImagemHelper().obterBytesDaImagemDeContato(UUID.toString()));
     }
 
@@ -84,7 +92,6 @@ public class ContatoMensageria implements Serializable {
         nome = (String) o.readObject();
         date = (Date) o.readObject();
         email = (String) o.readObject();
-        UUID = java.util.UUID.fromString((String) o.readObject());
         bytesDaFoto = (byte[]) o.readObject();
     }
 
@@ -97,5 +104,27 @@ public class ContatoMensageria implements Serializable {
         out.close();
 
         uriFoto = arquivoDaImagem.getAbsolutePath();
+    }
+
+
+    public ContatoDTO obterContatoDTO() throws IOException {
+        ContatoDTO contatoDTO = new ContatoDTO();
+        contatoDTO.UUID = this.UUID.toString();
+        contatoDTO.nome = this.nome;
+        contatoDTO.email = this.email;
+        contatoDTO.bytesDaFoto = getImagemHelper().obterBytesDaImagemDeContato(UUID.toString());
+        contatoDTO.date = this.date;
+
+        return contatoDTO;
+    }
+
+    public class ContatoDTO {
+
+        public Integer id;
+        public String UUID;
+        public String nome;
+        public Date date;
+        public String email;
+        public byte[] bytesDaFoto;
     }
 }

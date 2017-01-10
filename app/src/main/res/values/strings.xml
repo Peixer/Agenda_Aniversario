@@ -25,6 +25,10 @@
     <string name="error_email">E-mail inválido</string>
     <string name="error_nome">Nome inválido</string>
 
+    <!-- FORM EXPORTACAO -->
+    <string name="hint_nome_lista">Nome Lista de Contatos</string>
+    <string name="hint_senha_lista">Senha da Lista de Contatos</string>
+
     <!-- MENU LATERAL-->
     <string name="menu">Menu</string>
     <string name="adicionar_menu_lateral">Adicionar contato</string>

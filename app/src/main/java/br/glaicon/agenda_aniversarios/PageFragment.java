@@ -49,8 +49,7 @@ public class PageFragment extends Fragment {
         try {
             contatos = contatoDAO.buscarContatos(getTipoOrdenacao());
 
-            if (position == 0)
-                Collections.sort(contatos, dataComparator);
+            Collections.sort(contatos, getComparator());
 
             contatoAdapterContatos = new ContatoAdapter(getActivity(), contatos, getTipoOrdenacao());
 

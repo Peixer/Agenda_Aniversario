@@ -60,8 +60,8 @@ public class ContatoActivity extends ActionBarActivity {
         return edtNome.getText().toString();
     }
 
-    public String obterNomeArquivoTemporario() {
-        return contato.getUUID().toString() + "_temp";
+    public String obterNomeFotoTemporario() {
+        return getContato().getUUID().toString() + "_temp";
     }
 
     @Override
@@ -100,6 +100,7 @@ public class ContatoActivity extends ActionBarActivity {
             edtNome.setText(contato.getNome());
             edtEmail.setText(contato.getEmail());
             edtAniversario.setText(DateFormat.getDateInstance().format(contato.getDate()));
+            date = contato.getDate().getTime();
 
             if (contato.getUriFoto() != "") {
                 imageView.setImageDrawable(imagemHelper.obterRoundImagemDoContato(contato, bitmapCache, this.getResources()));
@@ -130,7 +131,8 @@ public class ContatoActivity extends ActionBarActivity {
     }
 
     private void renomearFotoTemporaria() {
-        File from = new File(obterNomeArquivoTemporario());
+        String fotoTemporaria = imagemHelper.obterCaminhoDaImagemDoContato(getContato().getUUID().toString()) + "_temp";
+        File from = new File(fotoTemporaria);
         File to = new File(imagemHelper.obterCaminhoDaImagemDoContato(getContato().getUUID().toString()));
         from.renameTo(to);
     }
@@ -190,7 +192,7 @@ public class ContatoActivity extends ActionBarActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == Crop.REQUEST_PICK)
                 try {
-                    Crop.of(data.getData(), android.net.Uri.fromFile(imagemHelper.obterImagemPeloNomeDoContato(obterNomeArquivoTemporario()))).asSquare().start(this);
+                    Crop.of(data.getData(), android.net.Uri.fromFile(imagemHelper.obterImagemPeloNomeDoContato(obterNomeFotoTemporario()))).asSquare().start(this);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
